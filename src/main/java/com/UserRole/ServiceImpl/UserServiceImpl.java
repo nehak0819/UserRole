@@ -1,5 +1,8 @@
 package com.UserRole.ServiceImpl;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.UserRole.Entity.User;
@@ -34,8 +37,9 @@ public class UserServiceImpl implements UserService {
     @Override
 
     public List<User> getAllUsers() {
-
-        return userRepository.findAll();
+    	List<User> All = new ArrayList<>();
+        userRepository.findAll().forEach(All::add);;
+        return All;
 
     }
 
@@ -49,11 +53,16 @@ public class UserServiceImpl implements UserService {
     }
 
  
+   
     @Override
+public void updateUser(Long id , User updatedUser) {
 
-    public void updateUser(User user) {
-
+        Optional<User> findById = userRepository.findById(id);
+        User user = findById.get();
+        user.setPassword(updatedUser.getPassword());
+        user.setUsername(updatedUser.getUsername());
         userRepository.save(user);
+       
 
     }
 

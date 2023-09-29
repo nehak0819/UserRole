@@ -40,7 +40,7 @@ public class AdminController {
         Role role = roleService.getRoleByName(roleName);     
         if (user != null && role != null) {
             user.getRoles().add(role);
-            userService.updateUser(user);
+            userService.updateUser(userId, user);
 
         }
 
@@ -54,7 +54,7 @@ public class AdminController {
         Role role = roleService.getRoleByName(roleName);     
         if (user != null && role != null) {
             user.getRoles().remove(role);
-            userService.updateUser(user);
+            userService.updateUser(userId, user );
 
         }
 
